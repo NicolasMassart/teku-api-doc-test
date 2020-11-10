@@ -10,13 +10,13 @@ executors:
 jobs:
   # Fake extract step, file is already in the repos
   extractAPISpec:
-  executor: node_executor
-  steps:
-    - checkout
-    - persist_to_workspace:
-        root: ~/project
-        paths:
-          - ./docs/openapi.json
+    executor: node_executor
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./docs/openapi.json
 
   publishAPIDoc:
     executor: node_executor
@@ -72,7 +72,7 @@ jobs:
             rm generate-versions.js
       - add_ssh_keys:
           fingerprints:
-            - 'ce:bf:42:77:bc:57:30:ae:08:0f:f5:fd:2a:18:ed:76'
+            - '54:c2:42:9c:85:ee:a0:ba:7c:83:85:2f:79:b0:0a:7c'
       - run:
           name: Set Git user params
           command: |
