@@ -60,6 +60,7 @@ function calculateSpecDetails(specFile) {
   const specVersion = calculateSpecVersion(specFile);
   const release = isReleaseVersion(specVersion);
   const latestDist = destinationPath(specFile, "latest");
+  const latestDistCompat = destinationPath(specFile, "latest");
   const releaseDist = destinationPath(specFile, specVersion);
 
   return {
@@ -67,6 +68,7 @@ function calculateSpecDetails(specFile) {
     version: specVersion,
     isReleaseVersion: release,
     latestDist: latestDist,
+    latestDistCompat : latestDistCompat,
     releaseDist: releaseDist,
   };
 }
