@@ -22,7 +22,7 @@ else {
   var versionNum = version[0].split('.')
   const parsedReleaseNum = Number.parseInt(versionNum[2], 10)
   versionNum[2] = parsedReleaseNum + 1
-  spec.info.version = `${versionNum.join('.')}-${version[1]}-${id}`
+  spec.info.version = `${versionNum.join('.')}-dev-${id}`
 }
 console.log(spec.info)
 
