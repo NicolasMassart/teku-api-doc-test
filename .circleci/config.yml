@@ -19,7 +19,7 @@ jobs:
             - ./.openapidoc/openapi.json
 
   publishOpenApiSpec:
-    executor: executor_node
+    executor: node_executor
     steps:
       - checkout
       - add_ssh_keys:
