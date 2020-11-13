@@ -61,4 +61,4 @@ Following should only be overridden if changing the project
 * `OA_VERSIONS_FILE_NAME` (default: `versions.json`)
 * `OA_DIST_DIR`           (default: `./dist`)
 * `OA_SPEC_URL`          (default: `http://localhost:5051/swagger-docs`)
-* `OA_SPEC_DIR`          (default: `open`)
+* `OA_SPEC_DIR`          (default: `./openapidoc/spec`)

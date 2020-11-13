@@ -8,15 +8,6 @@ executors:
           password: $DOCKER_PASSWORD_RO
 
 jobs:
-  # Fake extract step, file is already in the repos
-  extractOpenAPISpec:
-    executor: node_executor
-    steps:
-      - checkout
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - ./.openapidoc/spec/openapi.json
 
   publishOpenApiSpec:
     executor: node_executor
@@ -32,10 +23,20 @@ jobs:
             - node-cache-{{ checksum "./.openapidoc/package-lock.json" }}
             - node-cache-
       - run:
-          name: Build Folder
+          name: install
           working_directory: .openapidoc
           command: |
             npm ci
+      # DEBUG: fake version update
+      - run:
+          name: DEBUG generate api spec
+          working_directory: .openapidoc
+          command: |
+            node debug-generate.sh
+      - run:
+          name: Build Folder
+          working_directory: .openapidoc
+          command: |
             OA_GIT_USERNAME=$CIRCLE_USERNAME OA_GIT_EMAIL="${CIRCLE_USERNAME}@users.noreply.github.com" OA_GIT_URL=$CIRCLE_REPOSITORY_URL OA_GH_PAGES_BRANCH="gh-pages" node publish.js
       - save_cache:
           paths:
@@ -45,7 +46,6 @@ jobs:
 workflows:
   circleci:
     jobs:
-      - extractOpenAPISpec
       - publishOpenApiSpec:
           filters:
             branches:
@@ -54,7 +54,5 @@ workflows:
                 - /^release-.*/
             tags: # stable doc is published only on tags to prevent confusion on the doc site.
               only: /.*/
-          requires:
-            - extractOpenAPISpec
           context:
             - dockerhub-quorumengineering-ro
