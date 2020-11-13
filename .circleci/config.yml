@@ -32,7 +32,7 @@ jobs:
           name: DEBUG generate api spec
           working_directory: .openapidoc
           command: |
-            node debug-generate.sh
+            node debug-generate.js
       - run:
           name: Build Folder
           working_directory: .openapidoc
