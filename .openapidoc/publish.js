@@ -12,7 +12,7 @@ const log = (...args) => console.log(...args); // eslint-disable-line no-console
 async function main() {
   const cfg = config.getConfig();
 
-  // DEBUG: 
+  // DEBUG:
   console.log(cfg);
 
   const { distDir, specs, versions, ghPagesConfig } = cfg;
@@ -60,6 +60,7 @@ function prepareDistDir(dirPath) {
 
 function copySpecFileToDist(spec) {
   fs.copyFileSync(spec.path, spec.latestDist);
+  fs.copyFileSync(spec.path, spec.latestDistCompat);
   if (spec.isReleaseVersion) {
     fs.copyFileSync(spec.path, spec.releaseDist);
   }

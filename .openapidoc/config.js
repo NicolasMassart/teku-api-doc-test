@@ -59,8 +59,8 @@ function calculateSpecs() {
 function calculateSpecDetails(specFile) {
   const specVersion = calculateSpecVersion(specFile);
   const release = isReleaseVersion(specVersion);
-  const latestDist = destinationPath(specFile, "latest");
-  const latestDistCompat = destinationPath(specFile, "latest");
+  const latestDist = destinationPath(true, specFile, "latest");
+  const latestDistCompat = destinationPath(false, specFile, "latest");
   const releaseDist = destinationPath(specFile, specVersion);
 
   return {
@@ -68,7 +68,7 @@ function calculateSpecDetails(specFile) {
     version: specVersion,
     isReleaseVersion: release,
     latestDist: latestDist,
-    latestDistCompat : latestDistCompat,
+    latestDistCompat: latestDistCompat,
     releaseDist: releaseDist,
   };
 }
@@ -82,10 +82,10 @@ function isReleaseVersion(specVersion) {
   return !specVersion.includes("-dev-");
 }
 
-function destinationPath(specFile, suffix) {
-  const prefix = path.parse(specFile).name;
+function destinationPath(usePrefix, specFile, suffix) {
+  const prefix = usePrefix ? `${path.parse(specFile).name}-` : '';
   const extension = path.extname(specFile);
-  return path.join(distDir, `${prefix}-${suffix}${extension}`);
+  return path.join(distDir, `${prefix}${suffix}${extension}`);
 }
 
 function calculateVersionDetails(repo, branch) {

@@ -6,7 +6,7 @@
 const fs = require('fs')
 var crypto = require("crypto")
 
-let spec = require('./spec/openapi.json')
+let spec = require('./spec/teku.json')
 
 console.log(spec.info)
 
@@ -20,4 +20,4 @@ spec.info.version = `${versionNum.join('.')}-${version[1]}-${id}`
 console.log(spec.info)
 
 let data = JSON.stringify(spec);
-fs.writeFileSync('./spec/openapi.json', data);
+fs.writeFileSync('./spec/teku.json', data);
