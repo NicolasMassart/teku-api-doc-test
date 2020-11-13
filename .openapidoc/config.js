@@ -5,9 +5,9 @@ const GitUrlParse = require("git-url-parse");
 
 const distDir = process.env.OA_DIST_DIR || "./dist";
 const specDir =
-  process.env.OA_SPEC_URL || "../core/build/resources/main/openapi";
+  process.env.OA_SPEC_DIR || "./spec";
 const gitUrl =
-  process.env.OA_GIT_URL || "git@github.com:ConsenSys/web3signer.git";
+  process.env.OA_GIT_URL || "git@github.com:NicolasMassart/teku-api-doc-test.git";
 const gitUserName = process.env.OA_GIT_USERNAME || "CircleCI Build";
 const gitEmail = process.env.OA_GIT_EMAIL || "ci-build@consensys.net";
 const branch = process.env.OA_GH_PAGES_BRANCH || "gh-pages";
@@ -42,7 +42,7 @@ function getConfig() {
 }
 
 function calculateSpecs() {
-  const extension = ".yaml";
+  const extension = ".json";
   const specFiles = fs.readdirSync(specDir);
   var specArr = [];
   specFiles.forEach((file) => {

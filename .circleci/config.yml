@@ -16,7 +16,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - ./.openapidoc/openapi.json
+            - ./.openapidoc/spec/openapi.json
 
   publishOpenApiSpec:
     executor: node_executor
@@ -35,9 +35,8 @@ jobs:
           name: Build Folder
           working_directory: .openapidoc
           command: |
-            ls -la .openapidoc
-            # npm ci
-            # OA_GIT_USERNAME=$CIRCLE_USERNAME OA_GIT_EMAIL="${CIRCLE_USERNAME}@users.noreply.github.com" OA_GIT_URL=$CIRCLE_REPOSITORY_URL OA_GH_PAGES_BRANCH="gh-pages" node publish.js
+            npm ci
+            OA_GIT_USERNAME=$CIRCLE_USERNAME OA_GIT_EMAIL="${CIRCLE_USERNAME}@users.noreply.github.com" OA_GIT_URL=$CIRCLE_REPOSITORY_URL OA_GH_PAGES_BRANCH="gh-pages" node publish.js
       - save_cache:
           paths:
             - ~/.npm
