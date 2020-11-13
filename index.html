@@ -123,10 +123,13 @@
       // set the global versions value from the Json file,
       // update spec page on completions
       function getVersionsFromJsonFile(){
-        $.getJSON( "versions.json", function( data ) {
-          if(!jQuery.isEmptyObject(data)){ versions = data; }
-        })
-        .always(function() { updateSpec(); });
+        const versionFile = 'versions.json';
+        cache.delete(versionFile).then(function(response) {
+          $.getJSON( versionFile, function( data ) {
+            if(!jQuery.isEmptyObject(data)){ versions = data; }
+          })
+          .always(function() { updateSpec(); });
+        }
       }
 
       // event trigger functions
