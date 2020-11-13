@@ -50,6 +50,9 @@ function calculateSpecs() {
       specArr.push(calculateSpecDetails(path.join(specDir, file)));
     }
   });
+
+  // DEBUG:
+  console.log(specArr);
   return specArr;
 }
 
