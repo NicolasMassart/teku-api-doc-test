@@ -13,7 +13,7 @@ jobs:
   extractOpenAPISpec:
     executor: node_executor
     steps:
-      - prepare
+      - checkout
       - attach_workspace:
           at: ~/project
       - run:
