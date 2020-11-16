@@ -64,7 +64,7 @@ jobs:
 workflows:
   circleci:
     jobs:
-      - extractAPISpec
+      - extractOpenAPISpec
       - publishOpenApiSpec:
           filters:
             branches:
