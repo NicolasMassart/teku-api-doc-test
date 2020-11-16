@@ -9,6 +9,30 @@ executors:
 
 jobs:
 
+  # DEBUG: fake version update
+  extractOpenAPISpec:
+    executor: node_executor
+    steps:
+      - prepare
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Extract OpenAPI JSON
+          command: |
+            mkdir -p .openapidoc/spec
+            cp .specsource/teku.json .openapidoc/spec/teku.json
+      - run:
+          name: DEBUG generate api spec
+          working_directory: .openapidoc
+          command: |
+            node debug-generate.js
+      - store_artifacts:
+          path: .openapidoc/spec/teku.json
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .openapidoc/spec/teku.json
+
   publishOpenApiSpec:
     executor: node_executor
     steps:
@@ -27,12 +51,6 @@ jobs:
           working_directory: .openapidoc
           command: |
             npm ci
-      # DEBUG: fake version update
-      - run:
-          name: DEBUG generate api spec
-          working_directory: .openapidoc
-          command: |
-            node debug-generate.js
       - run:
           name: Build Folder
           working_directory: .openapidoc
@@ -46,6 +64,7 @@ jobs:
 workflows:
   circleci:
     jobs:
+      - extractAPISpec
       - publishOpenApiSpec:
           filters:
             branches:
@@ -54,5 +73,7 @@ workflows:
                 - /^release-.*/
             tags: # stable doc is published only on tags to prevent confusion on the doc site.
               only: /.*/
+          requires:
+            - extractAPISpec
           context:
             - dockerhub-quorumengineering-ro
