@@ -73,7 +73,7 @@ function calculateSpecDetails(specFile) {
 }
 
 function calculateSpecVersion(specFile) {
-  return yaml.safeLoad(fs.readFileSync(specFile, "utf8")).info.version;
+  return yaml.load(fs.readFileSync(specFile, "utf8")).info.version;
 }
 
 function isReleaseVersion(specVersion) {
