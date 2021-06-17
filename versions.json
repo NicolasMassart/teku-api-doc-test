@@ -4,8 +4,8 @@
   "source": "master"
  },
  "stable": {
-  "spec": "v1.2.4-dev-d2f133b4",
-  "source": "v1.2.4-dev-d2f133b4"
+  "spec": "v1.2.4-dev-4626ba49",
+  "source": "v1.2.4-dev-4626ba49"
  },
  "v20.11.0": {
   "spec": "v20.11.0",
@@ -46,5 +46,9 @@
  "v1.2.4-dev-d2f133b4": {
   "spec": "v1.2.4-dev-d2f133b4",
   "source": "v1.2.4-dev-d2f133b4"
+ },
+ "v1.2.4-dev-4626ba49": {
+  "spec": "v1.2.4-dev-4626ba49",
+  "source": "v1.2.4-dev-4626ba49"
  }
 }
